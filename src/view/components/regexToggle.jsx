@@ -1,0 +1,50 @@
+/*
+Copyright 2022 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+import React from 'react';
+import { useFormContext, Controller } from 'react-hook-form';
+import { Switch, Flex, ActionButton } from '@adobe/react-spectrum';
+
+export default ({ name, flags = 'i', ...rest }) => {
+  const { control } = useFormContext();
+
+  return (
+    <Controller
+      control={control}
+      name={name}
+      defaultValue=""
+      render={({ field: { onChange, value } }) => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Flex {...rest}>
+          <Switch isSelected={Boolean(value)} onChange={onChange} label="Regex">
+            Regex
+          </Switch>
+
+          <ActionButton
+            isQuiet
+            onPress={() => {
+              const options = {
+                pattern: value,
+                flags
+              };
+
+              return window.extensionBridge
+                .openRegexTester(options)
+                .then(onChange);
+            }}
+          >
+            Test
+          </ActionButton>
+        </Flex>
+      )}
+    />
+  );
+};

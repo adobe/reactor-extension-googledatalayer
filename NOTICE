@@ -1,0 +1,9 @@
+Reactor Google Data Layer Extension
+
+This extension includes code developed by Google and Valtech Switzerland.
+
+Some parts of the extension, which are copied from, derived from, or
+inspired by the Google Data Layer Helper Library https://github.com/google/data-layer-helper and the Valtech AEP Tags Google Data Layer Extension https://github.com/valtech-ch/aeptags-google-datalayer-extension
+
+The Initial Developer of the Helper code in the file getHelper.js is Google Inc copyright 2012.
+

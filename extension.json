@@ -1,0 +1,107 @@
+{
+  "displayName": "Google Data Layer",
+  "name": "adobegoogledatalayer",
+  "exchangeUrl": "https://exchange.adobe.com/apps/ec/108445/google-data-layer",
+  "version": "0.2.0",
+  "description": "Supports the use of a Google data layer in AEP Data Collection / Launch. The extension uses Google's Data Layer Helper. A Google Data Layer will be created if not present.",
+  "author": {
+    "name": "Adobe Consulting",
+    "email": "google-data-layer@adobe.com"
+  },
+  "viewBasePath": "dist/",
+  "iconPath": "resources/icons/icon.svg",
+  "dataElements": [
+    {
+      "displayName": "Google DL property key",
+      "name": "gtm-dl-property-key",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "libPath": "src/lib/dataElements/gtmDlPropertyKey.js",
+      "viewPath": "dataElements/gtmDlPropertyKey.html"
+    }
+  ],
+  "events": [
+    {
+      "displayName": "Google DL Push Event",
+      "name": "gtm-dl-push-event",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "method": {
+                "enum": ["allEvents", "allData"]
+              }
+            },
+            "required": ["method"],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "method": {
+                "enum": ["specificEvent"]
+              },
+              "eventKey": {
+                "type": "string",
+                "minLength": 1
+              },
+              "valueIsRegex": {
+                "type": "boolean"
+              }
+            },
+            "required": ["method", "eventKey"],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "libPath": "src/lib/events/gtmDlPushEvent.js",
+      "viewPath": "events/gtmDlPushEvent.html"
+    }
+  ],
+  "configuration": {
+    "viewPath": "configuration/configuration.html",
+    "schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "dataLayer": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": ["dataLayer"]
+    }
+  },
+  "actions": [
+    {
+      "name": "gtm-dl-push-action",
+      "displayName": "Google DL Push Action",
+      "libPath": "src/lib/actions/gtmDlPush.js",
+      "viewPath": "actions/gtmDlPushAction.html",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false,
+        "required": ["content"]
+      }
+    }
+  ],
+  "main": "src/lib/helpers/instantiateGtmDlHelper.js",
+  "platform": "web"
+}

@@ -1,0 +1,17 @@
+*.log
+*.crt
+*.key
+*.zip
+
+.idea/
+.history/
+.sandbox/
+.vscode/
+coverage/
+dist/
+node_modules/
+
+.DS_Store
+
+.entries
+.eslintcache
