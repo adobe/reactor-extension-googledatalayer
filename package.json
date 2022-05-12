@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git.corp.adobe.com/rfreeman/aeptags-google-datalayer-extension"
+    "url": "git+https://github.com:adobe/reactor-extension-googledatalayer.git"
   },
   "publishConfig": {
     "access": "public"
@@ -32,12 +32,11 @@
     "Google",
     "Tagmanagement"
   ],
-  "author": "Adobe Consulting",
-  "license": "UNLICENSED",
+  "author": "Adobe Consulting"
   "bugs": {
-    "url": "https://git.corp.adobe.com/rfreeman/aeptags-google-datalayer-extension/issues"
+    "url": "https://github.com/adobe/reactor-extension-googledatalayer/issues"
   },
-  "homepage": "https://git.corp.adobe.com/rfreeman/aeptags-google-datalayer-extension#readme",
+  "homepage": "https://github.com/adobe/reactor-extension-googledatalayer/#readme",
   "dependencies": {
     "@adobe/react-spectrum": "^3.16.5",
     "@react-aria/utils": "^3.11.3",
