@@ -78,7 +78,7 @@ The complex part of the behaviour stems from the difference between data pushed 
 
 The screenshot shows the Helper code defining these two payload objects in the parent 'detail' object.
 
-![eventobject](https://git.corp.adobe.com/storage/user/19246/files/32c1ae03-c674-46cf-aec1-cecd0f752730)
+![googledatalayer-detail-impl](https://user-images.githubusercontent.com/105236069/168050189-3123127a-94df-492f-bf78-1484bb1cf11a.png)
 
 An example event object is:
 
