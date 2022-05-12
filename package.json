@@ -1,5 +1,5 @@
 {
-  "name": "aeptags-gtmdl-extension",
+  "name": "reactor-extension-googledatalayer",
   "version": "1.0.0",
   "description": "The Google Data Layer extension adds support for a GTM/GTag Data Layer",
   "scripts": {
@@ -32,7 +32,7 @@
     "Google",
     "Tagmanagement"
   ],
-  "author": "Adobe Consulting"
+  "author": "Adobe Consulting",
   "bugs": {
     "url": "https://github.com/adobe/reactor-extension-googledatalayer/issues"
   },
