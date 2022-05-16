@@ -12,12 +12,11 @@ governing permissions and limitations under the License.
 'use strict';
 
 const constants = require('./constants');
-const getHelper = require('./getHelper');
 const getDataLayer = require('./getDataLayer');
+require('./getHelper')();
+require('./polyfill')();
 
-getHelper();
-
-window.helper = new window.DataLayerHelper(getDataLayer(), {
+new window.adobe.DataLayerHelper(getDataLayer(), {
   listener: function (argDataLayerModel, argEventModel) {
     if (argEventModel.event) {
       document.body.dispatchEvent(

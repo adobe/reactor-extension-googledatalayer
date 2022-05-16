@@ -16,6 +16,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 import ExtensionView from '../components/extensionView';
 import WrappedTextField from '../components/wrappedTextField';
 import RegexToggle from '../components/regexToggle';
+import constants from '../../lib/helpers/constants';
 
 export default () => {
   return (
@@ -25,7 +26,7 @@ export default () => {
         const { method, eventKey, valueIsRegex } = settings || {};
 
         return {
-          method: method || 'specificEvent',
+          method: method || constants.SPECIFICEVENT,
           eventKey,
           valueIsRegex
         };
@@ -35,7 +36,7 @@ export default () => {
           method
         };
 
-        if (method === 'specificEvent') {
+        if (method === constants.SPECIFICEVENT) {
           if (valueIsRegex) {
             settings.valueIsRegex = true;
           }
@@ -48,7 +49,7 @@ export default () => {
       validate={({ eventKey, method }) => {
         const errors = {};
 
-        if (!eventKey && method === 'specificEvent') {
+        if (!eventKey && method === constants.SPECIFICEVENT) {
           errors.eventKey = 'Please provide an event key';
         }
 
@@ -70,9 +71,11 @@ export default () => {
                   value={value}
                   onChange={onChange}
                 >
-                  <Radio value="allData">Changes excluding events</Radio>
-                  <Radio value="allEvents">All Events</Radio>
-                  <Radio value="specificEvent">Specific Event</Radio>
+                  <Radio value={constants.ALLDATA}>
+                    Changes excluding events
+                  </Radio>
+                  <Radio value={constants.ALLEVENTS}>All Events</Radio>
+                  <Radio value={constants.SPECIFICEVENT}>Specific Event</Radio>
                 </RadioGroup>
               )}
             />
