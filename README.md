@@ -54,7 +54,7 @@ This project uses code from the following projects:
 
 [Google Helper project](https://github.com/google/data-layer-helper)
 
-[ACDL Extention](https://github.com/pitchmuc/acdl_extension)
+[ACDL Extension](https://github.com/pitchmuc/acdl_extension)
 
 [Valtech AEP Tags Google Data Layer Extension](https://github.com/valtech-ch/aeptags-google-datalayer-extension)
 
@@ -71,30 +71,3 @@ For other npm scripts see the package.json
 ## Contribution
 
 We welcome contributions! Please see the included [contribution page](../CONTRIBUTING.md).
-
-## Functional Detail
-
-The complex part of the behaviour stems from the difference between data pushed to the data layer using the 'event:' keyword, and normal data pushed to the DL. Anything with the event keyword is a special case, and results in the creation of two objects by the Google Helper, which are passed as payload of the Custom Javascript Event that it fires. When this event is caught in a Launch rule, the Data Element dialog can be used to access the properties.
-
-The screenshot shows the Helper code defining these two payload objects in the parent 'detail' object.
-
-![googledatalayer-detail-impl](https://user-images.githubusercontent.com/105236069/168050189-3123127a-94df-492f-bf78-1484bb1cf11a.png)
-
-An example event object is:
-
-{
-"event": "gaEvent",
-"event_name": "navigation",
-"navigation": {
-"event_category": "demo_navigation",
-"event_action": "demo button click",
-"event_label": "fire navigation event",
-"navigation_item": "button"
-}
-}
-
-A Data Element will first check for its defined parameter in this object, if present.
-
-If there is no _eventModel_ object, then there has been a push to the data layer without using the 'event' keyword. Data Elements will be drawn from the _dataLayerModel_ obect, a complete 'snapshot' of the data layer.
-
-If a Data Element is used when no data layer activity is being processed, for example in the browser console using _satellite.getVar()_, then the Data Element will return data from the actual data layer (via the Helper), rather than from an event specific 'snapshot'.
