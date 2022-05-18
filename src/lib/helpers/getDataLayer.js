@@ -11,6 +11,12 @@ governing permissions and limitations under the License.
 
 'use strict';
 
+/*
+set/get datalayer from window object as this is Google standard
+support for multiple data layers in backlog:
+https://github.com/adobe/reactor-extension-googledatalayer/issues/1
+*/
+
 module.exports = () => {
   const name = turbine.getExtensionSettings().dataLayer;
   window[name] = window[name] || [];

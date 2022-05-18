@@ -7,7 +7,7 @@ jQuery v1.9.1 (c) 2005, 2012
 jQuery Foundation, Inc. jquery.org/license.
 */
 
-/* code has been altered to use window.adobe.DataLayerHelper instead of window.DataLayerHelper line 22,23 */
+/* code has been altered to use window.extensionGoogleDataLayer.DataLayerHelper instead of window.DataLayerHelper line 22,23 */
 /* code state #9e00d56 17 Aug 2020 https://github.com/google/data-layer-helper/blob/master/dist/data-layer-helper.js */
 
 module.exports = () => {
@@ -169,8 +169,8 @@ module.exports = () => {
     r.prototype.flatten = r.prototype.flatten;
     r.prototype.get = r.prototype.get;
     r.prototype.process = r.prototype.process;
-    window.adobe = window.adobe || {};
-    window.adobe.DataLayerHelper = r;
+    window.extensionGoogleDataLayer = window.extensionGoogleDataLayer || {};
+    window.extensionGoogleDataLayer.DataLayerHelper = r;
     function u(a) {
       return {
         set: function (b, c) {

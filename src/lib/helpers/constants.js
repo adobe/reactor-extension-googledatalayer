@@ -16,6 +16,7 @@ const constants = {
   GDATA: 'gtmDlData',
   SPECIFICEVENT: 'specificEvent',
   ALLEVENTS: 'allEvents',
-  ALLDATA: 'allData'
+  ALLDATA: 'allData',
+  DEFAULTDATALAYER: 'dataLayer'
 };
 module.exports = Object.freeze(constants);
