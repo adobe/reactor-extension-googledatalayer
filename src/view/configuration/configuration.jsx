@@ -13,6 +13,7 @@ import React from 'react';
 
 import ExtensionView from '../components/extensionView';
 import WrappedTextField from '../components/wrappedTextField';
+import constants from '../../lib/helpers/constants';
 
 export default () => {
   return (
@@ -22,7 +23,7 @@ export default () => {
         const { dataLayer } = settings || {};
 
         return {
-          dataLayer: dataLayer || 'dataLayer'
+          dataLayer: dataLayer || constants.DEFAULTDATALAYER
         };
       }}
       getSettings={({ values: { dataLayer } }) => ({
@@ -41,10 +42,10 @@ export default () => {
         <WrappedTextField
           minWidth="size-6000"
           name="dataLayer"
-          label="Google Data Layer object name"
+          label="Google Data Layer name"
           isRequired
           necessityIndicator="label"
-          description="Your Google Data Layer name, for example dataLayer."
+          description="e.g. <em>dataLayer</em>. Do not include <em>window</em> - this is implicit"
         />
       )}
     />

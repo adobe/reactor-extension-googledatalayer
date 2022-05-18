@@ -44,7 +44,7 @@ module.exports = function (settings, event) {
       'a property was read from the current datalayer ' +
         JSON.stringify(property)
     );
-    return window.helper.get(property);
+    return window.extensionGoogleDataLayer.dataLayerHelper.get(property);
   }
 
   /* try first to get the property from the current event
