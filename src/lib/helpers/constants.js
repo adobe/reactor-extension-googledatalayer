@@ -12,10 +12,11 @@ governing permissions and limitations under the License.
 'use strict';
 
 const constants = {
-  GEVENT: 'gtmDlEvent',
-  GDATA: 'gtmDlData',
-  SPECIFICEVENT: 'specificEvent',
-  ALLEVENTS: 'allEvents',
-  ALLDATA: 'allData'
+  DATALAYERCHANGE: 'dataLayerChange',
+  METHOD_SPECIFICEVENT: 'specificEvent',
+  METHOD_ALLEVENTS: 'allEvents',
+  METHOD_ALLDATA: 'allData',
+  METHOD_ALLCHANGES: 'allChanges',
+  DEFAULTDATALAYER: 'dataLayer'
 };
 module.exports = Object.freeze(constants);

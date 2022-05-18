@@ -1,7 +1,9 @@
 *.log
 *.crt
 *.key
+*.key.*
 *.zip
+uploader.sh
 
 .idea/
 .history/

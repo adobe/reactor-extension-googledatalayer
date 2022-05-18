@@ -12,41 +12,63 @@ governing permissions and limitations under the License.
 'use strict';
 
 const constants = require('../helpers/constants');
+const triggers = [];
 
-module.exports = function (settings, trigger) {
-  if (!settings) return;
+const handler = function (argEvent) {
+  triggers.forEach(function (triggerData) {
+    const settings = triggerData.settings;
+    const trigger = triggerData.trigger;
 
-  const { method, valueIsRegex, eventKey } = settings;
-
-  function handler(argEvent) {
+    const { method, valueIsRegex, eventKey } = settings;
     const eventModel =
       argEvent && argEvent.detail && argEvent.detail.eventModel;
 
     const result = {
       event: argEvent.detail
     };
-    if (method !== constants.SPECIFICEVENT) {
+
+    const eventName = eventModel && eventModel.event;
+
+    if (method === constants.METHOD_ALLCHANGES) {
       trigger(result);
       return;
     }
 
-    const eventName = eventModel && eventModel.event;
-
-    if (valueIsRegex) {
-      const re = new RegExp(eventKey);
-      if (String(eventName).match(re)) {
+    if (!eventName) {
+      if (method === constants.METHOD_ALLDATA) {
         trigger(result);
       }
-    } else if (eventKey === eventName) {
-      trigger(result);
+      return;
     }
-  }
-  if (method === constants.ALLDATA) {
-    document.body.addEventListener(constants.GDATA, handler);
-  } else if (
-    method === constants.ALLEVENTS ||
-    (method === constants.SPECIFICEVENT && eventKey !== '')
-  ) {
-    document.body.addEventListener(constants.GEVENT, handler);
-  }
+
+    if (method === constants.METHOD_ALLEVENTS) {
+      trigger(result);
+      return;
+    }
+
+    if (method === constants.METHOD_SPECIFICEVENT) {
+      if (valueIsRegex) {
+        const re = new RegExp(eventKey);
+        if (String(eventName).match(re)) {
+          trigger(result);
+        }
+      } else if (eventKey === eventName) {
+        trigger(result);
+      }
+    }
+  });
+};
+
+let initializeListener = function () {
+  document.body.addEventListener(constants.DATALAYERCHANGE, handler);
+  initializeListener = function () {};
+};
+
+module.exports = function (settings, trigger) {
+  triggers.push({
+    settings: settings,
+    trigger: trigger
+  });
+
+  initializeListener();
 };

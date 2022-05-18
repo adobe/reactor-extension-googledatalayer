@@ -16,11 +16,11 @@ const getDataLayer = require('./getDataLayer');
 require('./getHelper')();
 require('./polyfill')();
 
-new window.adobe.DataLayerHelper(getDataLayer(), {
-  listener: function (argDataLayerModel, argEventModel) {
-    if (argEventModel.event) {
+window.extensionGoogleDataLayer.dataLayerHelper =
+  new window.extensionGoogleDataLayer.DataLayerHelper(getDataLayer(), {
+    listener: function (argDataLayerModel, argEventModel) {
       document.body.dispatchEvent(
-        new CustomEvent(constants.GEVENT, {
+        new CustomEvent(constants.DATALAYERCHANGE, {
           bubbles: false,
           detail: {
             dataLayerModel: argDataLayerModel,
@@ -28,14 +28,6 @@ new window.adobe.DataLayerHelper(getDataLayer(), {
           }
         })
       );
-    } else {
-      document.body.dispatchEvent(
-        new CustomEvent(constants.GDATA, {
-          bubbles: false,
-          detail: { dataLayerModel: argDataLayerModel }
-        })
-      );
-    }
-  },
-  listenToPast: true
-});
+    },
+    listenToPast: true
+  });
