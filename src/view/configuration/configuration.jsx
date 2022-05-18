@@ -45,7 +45,7 @@ export default () => {
           label="Google Data Layer name"
           isRequired
           necessityIndicator="label"
-          description="e.g. <em>dataLayer</em>. Do not include <em>window</em> - this is implicit"
+          description="e.g. dataLayer. Do not include 'window' - this is implicit"
         />
       )}
     />

@@ -26,7 +26,7 @@ export default () => {
         const { method, eventKey, valueIsRegex } = settings || {};
 
         return {
-          method: method || constants.SPECIFICEVENT,
+          method: method || constants.METHOD_ALLCHANGES,
           eventKey,
           valueIsRegex
         };
@@ -36,7 +36,7 @@ export default () => {
           method
         };
 
-        if (method === constants.SPECIFICEVENT) {
+        if (method === constants.METHOD_SPECIFICEVENT) {
           if (valueIsRegex) {
             settings.valueIsRegex = true;
           }
@@ -49,7 +49,7 @@ export default () => {
       validate={({ eventKey, method }) => {
         const errors = {};
 
-        if (!eventKey && method === constants.SPECIFICEVENT) {
+        if (!eventKey && method === constants.METHOD_SPECIFICEVENT) {
           errors.eventKey = 'Please provide an event key';
         }
 
@@ -71,11 +71,16 @@ export default () => {
                   value={value}
                   onChange={onChange}
                 >
-                  <Radio value={constants.ALLDATA}>
-                    Changes excluding events
+                  <Radio value={constants.METHOD_ALLCHANGES}>
+                    All Pushes to the Data Layer
                   </Radio>
-                  <Radio value={constants.ALLEVENTS}>All Events</Radio>
-                  <Radio value={constants.SPECIFICEVENT}>Specific Event</Radio>
+                  <Radio value={constants.METHOD_ALLDATA}>
+                    Pushes excluding events
+                  </Radio>
+                  <Radio value={constants.METHOD_ALLEVENTS}>All Events</Radio>
+                  <Radio value={constants.METHOD_SPECIFICEVENT}>
+                    Specific Event
+                  </Radio>
                 </RadioGroup>
               )}
             />
@@ -95,10 +100,16 @@ export default () => {
               </Flex>
             )}
             <Heading level={2}>Examples</Heading>
-            <Heading level={3}>Listen to all data changes</Heading>
+            <Heading level={3}>Listen to all pushes</Heading>
             <p>
-              Listening to all data changes will trigger the rule when data are
-              being pushed to the Data Layer (excluding during events).
+              Listening to all pushes will trigger the rule when data or events
+              are pushed to the Data Layer.
+            </p>
+            <Heading level={3}>Listen to all data pushes</Heading>
+            <p>
+              Listening to all data pushes will trigger the rule when data are
+              being pushed to the Data Layer, but not during events, i.e. not
+              when the event keyword is used.
             </p>
             <p>This push will trigger the rule: </p>
             <div className="code">
@@ -119,7 +130,7 @@ export default () => {
             </div>
             <Heading level={3}>Listen to all events</Heading>
             <p>
-              Listening to all event will trigger the rule when an event are
+              Listening to all event will trigger the rule when any event is
               being pushed to the Data Layer.
             </p>
             <p>This push will trigger the rule: </p>{' '}

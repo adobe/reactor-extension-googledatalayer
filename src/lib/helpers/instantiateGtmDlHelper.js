@@ -19,24 +19,15 @@ require('./polyfill')();
 window.extensionGoogleDataLayer.dataLayerHelper =
   new window.extensionGoogleDataLayer.DataLayerHelper(getDataLayer(), {
     listener: function (argDataLayerModel, argEventModel) {
-      if (argEventModel.event) {
-        document.body.dispatchEvent(
-          new CustomEvent(constants.DATALAYERCHANGE, {
-            bubbles: false,
-            detail: {
-              dataLayerModel: argDataLayerModel,
-              eventModel: argEventModel
-            }
-          })
-        );
-      } else {
-        document.body.dispatchEvent(
-          new CustomEvent(constants.DATALAYERCHANGE, {
-            bubbles: false,
-            detail: { dataLayerModel: argDataLayerModel }
-          })
-        );
-      }
+      document.body.dispatchEvent(
+        new CustomEvent(constants.DATALAYERCHANGE, {
+          bubbles: false,
+          detail: {
+            dataLayerModel: argDataLayerModel,
+            eventModel: argEventModel
+          }
+        })
+      );
     },
     listenToPast: true
   });

@@ -13,11 +13,10 @@ governing permissions and limitations under the License.
 
 const constants = {
   DATALAYERCHANGE: 'dataLayerChange',
-  GEVENT: 'gtmDlEvent',
-  GDATA: 'gtmDlData',
-  SPECIFICEVENT: 'specificEvent',
-  ALLEVENTS: 'allEvents',
-  ALLDATA: 'allData',
+  METHOD_SPECIFICEVENT: 'specificEvent',
+  METHOD_ALLEVENTS: 'allEvents',
+  METHOD_ALLDATA: 'allData',
+  METHOD_ALLCHANGES: 'allChanges',
   DEFAULTDATALAYER: 'dataLayer'
 };
 module.exports = Object.freeze(constants);
