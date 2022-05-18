@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 'use strict';
 
 const constants = {
+  DATALAYERCHANGE: 'dataLayerChange',
   GEVENT: 'gtmDlEvent',
   GDATA: 'gtmDlData',
   SPECIFICEVENT: 'specificEvent',
