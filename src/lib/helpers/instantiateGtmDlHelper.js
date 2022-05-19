@@ -14,7 +14,6 @@ governing permissions and limitations under the License.
 const constants = require('./constants');
 const getDataLayer = require('./getDataLayer');
 require('./getHelper')();
-require('./polyfill')();
 
 window.extensionGoogleDataLayer.dataLayerHelper =
   new window.extensionGoogleDataLayer.DataLayerHelper(getDataLayer(), {
