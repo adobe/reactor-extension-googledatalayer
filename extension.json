@@ -2,7 +2,7 @@
   "displayName": "Google Data Layer",
   "name": "adobegoogledatalayer",
   "exchangeUrl": "https://exchange.adobe.com/apps/ec/108445/google-data-layer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Supports the use of a Google data layer in AEP Data Collection / Launch. The extension uses Google's Data Layer Helper. A Google Data Layer will be created if not present.",
   "author": {
     "name": "Adobe Consulting",
@@ -99,6 +99,16 @@
         },
         "additionalProperties": false,
         "required": ["content"]
+      }
+    },
+    {
+      "name": "gtm-dl-reset-action",
+      "displayName": "Google DL Reset to Computed State",
+      "libPath": "src/lib/actions/gtmDlReset.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "additionalProperties": false
       }
     }
   ],
