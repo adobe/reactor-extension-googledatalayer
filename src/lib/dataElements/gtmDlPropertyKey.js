@@ -18,13 +18,13 @@ module.exports = function (settings, event) {
   const eventModel = event && event.eventModel;
 
   if (hasSettings(settings)) {
-    if (!hasEvent(eventModel)) {
-      return getPropertyFromDatalayer(settings.value);
+    if (!isInTagsEvent(dataLayerModel)) {
+      return getPropertyFromRawDatalayer(settings.value);
     } else {
-      return getPropertyFromEvent(settings.value, eventModel, dataLayerModel);
+      return getProperty(settings.value, eventModel, dataLayerModel);
     }
   } else {
-    if (!hasEvent(eventModel)) {
+    if (!isInTagsEvent(dataLayerModel)) {
       return getDataLayer();
     } else {
       return dataLayerModel;
@@ -35,11 +35,11 @@ module.exports = function (settings, event) {
     return !!settings && settings.value;
   }
 
-  function hasEvent(eventModel) {
-    return !!eventModel && eventModel.value;
+  function isInTagsEvent(dataLayerModel) {
+    return !!dataLayerModel;
   }
 
-  function getPropertyFromDatalayer(property) {
+  function getPropertyFromRawDatalayer(property) {
     turbine.logger.debug(
       'a property was read from the current datalayer ' +
         JSON.stringify(property)
@@ -50,7 +50,7 @@ module.exports = function (settings, event) {
   /* try first to get the property from the current event
 if not available get the property from the datalayer model
  */
-  function getPropertyFromEvent(value, eventModel, dataLayerModel) {
+  function getProperty(value, eventModel, dataLayerModel) {
     if (value) {
       turbine.logger.debug(
         'a property was read from the internal helper model ' +
