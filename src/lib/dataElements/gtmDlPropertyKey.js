@@ -14,8 +14,8 @@ governing permissions and limitations under the License.
 const getDataLayer = require('../helpers/getDataLayer');
 
 module.exports = function (settings, event) {
-  const dataLayerModel = event && event.dataLayerModel;
-  const eventModel = event && event.eventModel;
+  const dataLayerModel = event && event.event && event.event.dataLayerModel;
+  const eventModel = event && event.event && event.event.eventModel;
 
   if (hasSettings(settings)) {
     if (!isInTagsEvent(dataLayerModel)) {
@@ -47,16 +47,17 @@ module.exports = function (settings, event) {
     return window.extensionGoogleDataLayer.dataLayerHelper.get(property);
   }
 
-  /* try first to get the property from the current event
-if not available get the property from the datalayer model
- */
-  function getProperty(value, eventModel, dataLayerModel) {
-    if (value) {
+  /* when fetching a property try the event object first, then the data layer model */
+  function getProperty(property, eventModel, dataLayerModel) {
+    if (property) {
+      const value = eventModel[property]
+        ? eventModel[property]
+        : dataLayerModel[property];
       turbine.logger.debug(
         'a property was read from the internal helper model ' +
-          JSON.stringify(property)
+          JSON.stringify(value)
       );
-      return eventModel[value] ? eventModel[value] : dataLayerModel[value];
+      return value;
     }
   }
 };
