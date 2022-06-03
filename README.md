@@ -30,9 +30,19 @@ The extension is however still in beta, and despite extensive testing, unwanted 
 
 ## Event Integrity
 
-A key function of an Event Driven Data Layer is to process snapshots of the data layer when an event is caught, ie. within the context of an event. This ensures that multiple rapid events do not conflict during near simultaneous handling and result in an erroneous read of data in the data layer. The AEP Tags extension _data elements_ and related _actions_ do respect this and process the data layer in the context of individual events. For example if a series of events are written to the data layer almost simultaneously, each is caught and processed separately using the state of the datalayer at the time the event fired.
+A key function of an Event Driven Data Layer (EDDL) is to allow stable-state 'snapshots' of the data layer to be processed independently of ongoing data layer activity. The GDL _Helper_ object maintains an internal model of the data layer and passes a copy of this model to a Tags rule whenever the data layer state changes (a _push_ event); so allowing Tags to capture the 'snapshot' in an Rule, and access the model of the data layer in a stable state.
 
-It is also possible to do a simple read of the data layer outside the context of an event.
+This functionality ensures that multiple rapid events do not conflict during near simultaneous writing to the data layer, as they could if code accessed the data layer directly.  
+
+The AEP Tags extension _data elements_ and related _actions_ do make use of the stable model of the data layer whenever the extension _event_ dialog is used to configure a data layer listener. 
+
+## Use of Data Elements and Actions in General Tags Rules
+
+When Tags rules fire on events that are not related to the data layer such as _Library Loaded_, the _actions_ and _data elements_ of the GDL extension are still available, but will access the live data layer directly, as no stable state 'snapshot' is available.  
+
+## Computed State
+
+A term also used in the context of EDDLs is Computed State.  The Computed State of the data layer is the object that contains the merged values of all properties in the data layer.  The most recent values of any given property are retained.  This is relevant to an _action_ provided by the extension, which resets the data layer to the Computed State.   
 
 ## Event History
 
@@ -47,7 +57,7 @@ The data extension provides:
 - A Data Element for accessing Data Layer values.
 - A listener event to catch data layer events and changes.
 - An action to support dataLayer push
-- An action to reset the datalayer from the computed state if available
+- An action to reset the datalayer to the computed state if available
 
 ## Source Projects
 
