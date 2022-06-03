@@ -81,4 +81,4 @@ For other npm scripts see the package.json
 
 ## Contribution
 
-We welcome contributions! Please see the included [contribution page](../CONTRIBUTING.md).
+We welcome contributions! Please see the included [contribution page](./CONTRIBUTING.md).
