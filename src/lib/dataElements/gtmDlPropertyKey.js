@@ -50,14 +50,24 @@ module.exports = function (settings, event) {
   /* when fetching a property try the event object first, then the data layer model */
   function getProperty(property, eventModel, dataLayerModel) {
     if (property) {
-      const value = eventModel[property]
-        ? eventModel[property]
-        : dataLayerModel[property];
+      const valueFromEventModel = extractValueFromObject(property, eventModel);
+      const value = valueFromEventModel
+        ? valueFromEventModel
+        : extractValueFromObject(property, dataLayerModel);
       turbine.logger.debug(
         'a property was read from the internal helper model ' +
           JSON.stringify(value)
       );
       return value;
     }
+  }
+
+  function extractValueFromObject(key, target) {
+    const split = key.split('.');
+    for (let i = 0; i < split.length; i++) {
+      if (target[split[i]] === undefined) return undefined;
+      target = target[split[i]];
+    }
+    return target;
   }
 };
