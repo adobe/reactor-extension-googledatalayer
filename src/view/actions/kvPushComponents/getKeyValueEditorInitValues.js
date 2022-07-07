@@ -9,19 +9,17 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-/* istanbul ignore file */
+export default (initInfo) => {
+  const { settings } = initInfo;
+  const { parameters } = settings || {};
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider, lightTheme } from '@adobe/react-spectrum';
+  if (!parameters || parameters.length === 0) {
+    return {
+      parameters: [{ key: '', value: '' }]
+    };
+  }
 
-import './global.styl';
-
-export default (View) => {
-  ReactDOM.render(
-    <Provider colorScheme="light" theme={lightTheme}>
-      <View />
-    </Provider>,
-    document.getElementById('content')
-  );
+  return {
+    parameters
+  };
 };
