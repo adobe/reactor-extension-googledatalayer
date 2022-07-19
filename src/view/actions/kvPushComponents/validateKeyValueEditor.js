@@ -15,22 +15,15 @@ export default (values) => {
 
   (values.parameters || []).forEach((parameter, index) => {
     if (parameter.key && !parameter.value) {
-      errors[`parameters[${index}][value]`] = {
-        message: 'Please provide a value',
-        type: 'required'
-      };
+      errors[`parameters[${index}][value]`] = 'Please provide a value';
     } else if (!parameter.key && parameter.value) {
-      errors[`parameters[${index}][key]`] = {
-        message: 'Please provide a key',
-        type: 'required'
-      };
+      errors[`parameters[${index}][key]`] = 'Please provide a key';
     }
 
     if (configuredParameters.indexOf(parameter.key) !== -1) {
-      errors[`parameters[${index}][key]`] = {
-        message: `Key ${parameter.key} is already configured`,
-        type: 'duplicated'
-      };
+      errors[
+        `parameters[${index}][key]`
+      ] = `Key ${parameter.key} is already configured`;
     } else if (parameter.key) {
       configuredParameters.push(parameter.key);
     }
