@@ -25,7 +25,7 @@ module.exports = function (settings, event) {
     }
   } else {
     if (!isInTagsEvent(dataLayerModel)) {
-      return getDataLayer();
+      return window.extensionGoogleDataLayer.dataLayerHelper.getComputedState();
     } else {
       return dataLayerModel;
     }
