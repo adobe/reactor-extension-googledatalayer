@@ -21,6 +21,7 @@ module.exports = () => {
             a[b] = c.value;
             return a;
           };
+
     function g(a) {
       a = [
         'object' == typeof globalThis && globalThis,
@@ -35,7 +36,9 @@ module.exports = () => {
       }
       throw Error('Cannot find global object');
     }
+
     var m = g(this);
+
     function n(a, b) {
       if (b)
         a: {
@@ -54,6 +57,7 @@ module.exports = () => {
             f(c, a, { configurable: !0, writable: !0, value: b });
         }
     }
+
     var p =
       'function' == typeof Object.assign
         ? Object.assign
@@ -74,6 +78,7 @@ module.exports = () => {
 */
     var q =
       /\[object (Boolean|Number|String|Function|Array|Date|RegExp|Arguments)\]/;
+
     function r(a) {
       return null == a
         ? String(a)
@@ -81,9 +86,11 @@ module.exports = () => {
         ? a[1].toLowerCase()
         : 'object';
     }
+
     function u(a, b) {
       return Object.prototype.hasOwnProperty.call(Object(a), b);
     }
+
     function v(a) {
       if (!a || 'object' != r(a) || a.nodeType || a == a.window) return !1;
       try {
@@ -99,6 +106,7 @@ module.exports = () => {
       for (var b in a);
       return void 0 === b || u(a, b);
     }
+
     function w(a, b) {
       var c = {},
         d = c;
@@ -107,6 +115,7 @@ module.exports = () => {
       d[a[a.length - 1]] = b;
       return c;
     }
+
     function x(a, b) {
       var c = !a._clear,
         d;
@@ -155,6 +164,7 @@ module.exports = () => {
       };
       b.processNow && this.process();
     }
+
     y.prototype.process = function () {
       this.registerProcessor('set', function () {
         var c = {};
@@ -190,6 +200,7 @@ module.exports = () => {
       a in this.c || (this.c[a] = []);
       this.c[a].push(b);
     };
+
     function A(a, b, c) {
       c = void 0 === c ? !1 : c;
       if (a.i && (a.f.push.apply(a.f, b), !a.g))
@@ -228,6 +239,7 @@ module.exports = () => {
           c || ((a.g = !0), a.m(a.b, b), (a.g = !1));
         }
     }
+
     y.prototype.registerProcessor = y.prototype.registerProcessor;
     y.prototype.flatten = y.prototype.flatten;
     y.prototype.getComputedState = y.prototype.j;
@@ -235,6 +247,7 @@ module.exports = () => {
     y.prototype.process = y.prototype.process;
     window.extensionGoogleDataLayer = window.extensionGoogleDataLayer || {};
     window.extensionGoogleDataLayer.DataLayerHelper = y;
+
     function z(a) {
       return {
         set: function (b, c) {
