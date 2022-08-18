@@ -20,6 +20,9 @@
         "properties": {
           "value": {
             "type": "string"
+          },
+          "isReturnOnlyEventProps": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
