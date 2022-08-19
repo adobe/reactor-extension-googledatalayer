@@ -15,18 +15,20 @@ const constants = require('./constants');
 const getDataLayer = require('./getDataLayer');
 require('./getHelper')();
 
-window.extensionGoogleDataLayer.dataLayerHelper =
-  new window.extensionGoogleDataLayer.DataLayerHelper(getDataLayer(), {
-    listener: function (argDataLayerModel, argEventModel) {
-      document.body.dispatchEvent(
-        new CustomEvent(constants.DATALAYERCHANGE, {
-          bubbles: false,
-          detail: {
-            dataLayerModel: argDataLayerModel,
-            eventModel: argEventModel
-          }
-        })
-      );
-    },
-    listenToPast: true
-  });
+module.exports = () => {
+  window.extensionGoogleDataLayer.dataLayerHelper =
+    new window.extensionGoogleDataLayer.DataLayerHelper(getDataLayer(), {
+      listener: function (argDataLayerModel, argEventModel) {
+        document.body.dispatchEvent(
+          new CustomEvent(constants.DATALAYERCHANGE, {
+            bubbles: false,
+            detail: {
+              dataLayerModel: argDataLayerModel,
+              eventModel: argEventModel
+            }
+          })
+        );
+      },
+      listenToPast: true
+    });
+};
