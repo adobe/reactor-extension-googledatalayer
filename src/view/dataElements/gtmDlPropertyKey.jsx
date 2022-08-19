@@ -13,23 +13,26 @@ import React from 'react';
 import { Heading } from '@adobe/react-spectrum';
 import ExtensionView from '../components/extensionView';
 import WrappedTextField from '../components/wrappedTextField';
+import ToggleSwitch from '../components/toggleSwitch';
 
 export default () => {
   return (
     <ExtensionView
       getInitialValues={({ initInfo }) => {
         const { settings } = initInfo;
-        const { value } = settings || {};
+        const { value, isReturnOnlyEventProps } = settings || {};
 
         return {
-          value
+          value,
+          isReturnOnlyEventProps
         };
       }}
-      getSettings={({ values: { value } }) => ({
-        value
+      getSettings={({ values: { value, isReturnOnlyEventProps } }) => ({
+        value,
+        isReturnOnlyEventProps
       })}
       validate={() => ({})}
-      render={() => (
+      render={(isReturnOnlyEventProps) => (
         <>
           <WrappedTextField
             minWidth="size-6000"
@@ -37,32 +40,54 @@ export default () => {
             label="Google Data Layer property"
             necessityIndicator="label"
           />
+          <ToggleSwitch
+            isSelected={Boolean(isReturnOnlyEventProps)}
+            label="Only event properties"
+            name="isReturnOnlyEventProps"
+            marginTop="size-300"
+          />
+
+          <Heading level={2}>If called within a data layer push event:</Heading>
+
+          <ul>
+            <li>
+              An empty field returns a copy of the data layer computed state, or
+              the event JSON object at the time of the event, depending on the
+              <em>Only event properties</em> toggle setting.
+            </li>
+            <li>
+              Entering a property returns the property from the data layer event
+              or computed state, depending on the
+              <em>Only event properties</em> toggle setting.
+            </li>
+            <li>
+              Selecting the option <em>Only event properties</em> prevents the
+              prevents the return of data layer computed state values. If this
+              option is <strong>not set</strong>, the requested data attribute
+              or empty field will will take values from the entire computed
+              state.
+            </li>
+          </ul>
 
           <Heading level={2}>
-            If called with context (during an event, condition or action):
+            If called outside a data layer push event (for example in a core
+            event such as Library Loaded):
           </Heading>
 
           <ul>
             <li>
-              empty field returns a copy of the datalayer model JSON object at
-              the time of the event
+              A data layer model property at the time of script execution is
+              returned.
             </li>
             <li>
-              entering a property returns the property of the datalayer model,
-              eg. &apos;event_name&apos; will return
-              &apos;event.model.event_name&apos;
+              An empty field returns a copy of the data layer computed state
+              JSON as at at the time of script execution
+            </li>
+            <li>
+              The <em>Only event properties</em> toggle does not have any effect
+              in either of these cases.
             </li>
           </ul>
-
-          <Heading level={2}>If called without context:</Heading>
-
-          <p>
-            A datalayer property at the time of script execution is returned.
-          </p>
-          <p>
-            In the case of no context and an empty property, the complete data
-            layer JSON object will be returned (read directly from the page).
-          </p>
         </>
       )}
     />
