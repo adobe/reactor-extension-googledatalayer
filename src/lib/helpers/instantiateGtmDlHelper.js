@@ -16,15 +16,17 @@ const getDataLayer = require('./getDataLayer');
 require('./getHelper')();
 
 module.exports = () => {
+  turbine.logger.debug('instantiating helper...');
   window.extensionGoogleDataLayer.dataLayerHelper =
+    window.extensionGoogleDataLayer.dataLayerHelper ||
     new window.extensionGoogleDataLayer.DataLayerHelper(getDataLayer(), {
       listener: function (argDataLayerModel, argEventModel) {
         document.body.dispatchEvent(
           new CustomEvent(constants.DATALAYERCHANGE, {
             bubbles: false,
             detail: {
-              dataLayerModel: argDataLayerModel,
-              eventModel: argEventModel
+              dataLayerModel: Object.assign({}, argDataLayerModel),
+              eventModel: Object.assign({}, argEventModel)
             }
           })
         );
