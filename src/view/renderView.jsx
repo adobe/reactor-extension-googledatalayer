@@ -12,16 +12,17 @@ governing permissions and limitations under the License.
 /* istanbul ignore file */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider, lightTheme } from '@adobe/react-spectrum';
 
 import './global.styl';
 
 export default (View) => {
-  ReactDOM.render(
+  const container = document.getElementById('content');
+  const root = createRoot(container); // createRoot(container!) if you use TypeScript
+  root.render(
     <Provider colorScheme="light" theme={lightTheme}>
       <View />
-    </Provider>,
-    document.getElementById('content')
+    </Provider>
   );
 };

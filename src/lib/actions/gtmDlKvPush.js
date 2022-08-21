@@ -24,6 +24,5 @@ module.exports = function (settings) {
     return allParameters;
   },
   {});
-  console.log(options);
   getDataLayer().push(options);
 };
