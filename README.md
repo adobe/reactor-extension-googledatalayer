@@ -15,9 +15,9 @@ The Google data layer extension is intended to support the use case of Google an
 - Google solutions directly added in page, eg. GTag code in the header.
 - Two tag managers, Tags and Google Tag Manager on the same page (double tagging). While poor practice this is a necessity under some circumstances, for example Google -> Adobe migration.
 
-## Comparison with using a shared Adobe Data Layer
+## Compatibility with AEP / XDM
 
-Google technology is tightly coupled to the Google data layer and one is automatically created by Google solutions if not present. Tags is explicitly data layer agnostic and will not inject a data layer without addition code or a data layer extension. Shared use of the Google Data Layer is therefore the obvious choice.
+The extension is fully compatible with a Platform Web SDK / XDM implementation, as XDM mapping is not affected by the choice of data layer. The extension was originally developed to support adoption of Web SDK in a primarily Google environment.
 
 ## Simultaneous Data Layer Access Risk
 
@@ -28,7 +28,7 @@ The extension does not change the data layer unless a push is made, nor interact
 
 ## Event Integrity
 
-A key function of an Event Driven Data Layer (EDDL) is to allow stable-state 'snapshots' of the data layer to be processed independently of ongoing data layer activity. The GDL _Helper_ object maintains the data layer computed state (an internal model of the data layer) and passes a copy of this state to a Tags rule whenever the data layer state changes (a _push_ event); so allowing Tags to process the event-specific 'snapshot' in a Rule.
+A key function of an Event Driven Data Layer (EDDL) is to allow stable-state 'snapshots' of the data layer to be processed independently of ongoing data layer activity. To achieve this the GDL _Helper_ object maintains the data layer computed state (an internal model of the data layer) and passes a copy of this state to a Tags rule whenever the data layer state changes (a _push_ event); so allowing Tags to process the event-specific 'snapshot' in a Rule.
 This functionality ensures that multiple rapid events do not conflict during near simultaneous writing to the data layer, as they could if code accessed the data layer directly.
 
 The Tags extension _data elements_ and related _actions_ do make use of the stable model of the data layer whenever the extension _event_ dialog is used to configure a data layer listener.
