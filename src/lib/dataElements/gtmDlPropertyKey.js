@@ -49,7 +49,7 @@ module.exports = function (settings, event) {
     }
   }
 
-  return JSON.stringify(returnValue);
+  return returnValue;
 
   function hasSettings(settings) {
     return !!settings && settings.value;
@@ -76,14 +76,21 @@ module.exports = function (settings, event) {
   ) {
     if (property) {
       const valueFromEventModel = extractValueFromObject(property, eventModel);
-      const value =
-        valueFromEventModel && !isReturnOnlyEventProps
-          ? valueFromEventModel
-          : extractValueFromObject(property, dataLayerModel);
-      turbine.logger.debug(
-        'a property was read from the computed state after a push event ' +
-          JSON.stringify(value)
-      );
+      let value = '';
+      if (valueFromEventModel) {
+        value = valueFromEventModel;
+        turbine.logger.debug(
+          'a property was read from the event object after a push event ' +
+            JSON.stringify(property + ' = ' + value)
+        );
+      }
+      if (!value && !isReturnOnlyEventProps) {
+        value = extractValueFromObject(property, dataLayerModel);
+        turbine.logger.debug(
+          'a property was read from the computed state after a push event ' +
+            JSON.stringify(property + ' = ' + value)
+        );
+      }
       return value;
     }
   }
