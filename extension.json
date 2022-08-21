@@ -2,8 +2,8 @@
   "displayName": "Google Data Layer",
   "name": "adobegoogledatalayer",
   "exchangeUrl": "https://exchange.adobe.com/apps/ec/108445/google-data-layer",
-  "version": "1.0.7",
-  "description": "Supports the use of a Google data layer in AEP Data Collection / Launch. The extension uses Google's Data Layer Helper. A Google Data Layer will be created if not present.",
+  "version": "1.1.2",
+  "description": "Supports the use of a Google data layer in Platform Data Collection / Launch. The extension uses Google's Data Layer Helper. A Google Data Layer will be created if not present.",
   "author": {
     "name": "Adobe Consulting",
     "email": "google-data-layer@adobe.com"
@@ -20,6 +20,9 @@
         "properties": {
           "value": {
             "type": "string"
+          },
+          "isReturnOnlyEventProps": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -137,7 +140,11 @@
       "name": "gtm-dl-reset-action",
       "displayName": "Google DL Reset to Computed State",
       "libPath": "src/lib/actions/gtmDlReset.js",
-      "schema": {}
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "additionalProperties": false
+      }
     }
   ],
   "main": "src/lib/helpers/instantiateGtmDlHelper.js",
