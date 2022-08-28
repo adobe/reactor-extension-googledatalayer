@@ -2,7 +2,7 @@
   "displayName": "Google Data Layer",
   "name": "adobegoogledatalayer",
   "exchangeUrl": "https://exchange.adobe.com/apps/ec/108445/google-data-layer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Supports the use of a Google data layer in Platform Data Collection / Launch. The extension uses Google's Data Layer Helper. A Google Data Layer will be created if not present.",
   "author": {
     "name": "Adobe Consulting",
@@ -102,6 +102,38 @@
         },
         "additionalProperties": false,
         "required": ["content"]
+      }
+    },
+    {
+      "name": "gtm-dl-kv-push-action",
+      "displayName": "Google DL KV Push Action",
+      "viewPath": "actions/gtmDlKvPushAction.html",
+      "libPath": "src/lib/actions/gtmDlKvPush.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false,
+              "required": ["key", "value"]
+            },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
       }
     },
     {
