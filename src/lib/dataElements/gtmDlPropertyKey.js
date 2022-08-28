@@ -16,31 +16,27 @@ const getDataLayer = require('../helpers/getDataLayer');
 module.exports = function (settings, event) {
   const dataLayerModel = event && event.event && event.event.dataLayerModel;
   const eventModel = event && event.event && event.event.eventModel;
-  const isReturnOnlyEventProps = Boolean(settings.isReturnOnlyEventProps);
+  const isReturnOnlyEventProps = settings.isReturnOnlyEventProps;
+  const property = settings && settings.value;
+
   turbine.logger.debug(
     'isReturnOnlyEventProps toggle is set to ' + isReturnOnlyEventProps
   );
   turbine.logger.debug(
-    isInDataLayerPushEvent(dataLayerModel)
+    isInDataLayerPushEvent()
       ? 'the rule is running in response to a data layer push event'
       : 'the rule is being executed outside a data layer push event'
   );
 
   let returnValue = '';
-
-  if (hasSettings(settings)) {
-    if (!isInDataLayerPushEvent(dataLayerModel)) {
-      returnValue = getPropertyFromHelperModel(settings.value);
+  if (property) {
+    if (!isInDataLayerPushEvent()) {
+      returnValue = getPropertyFromHelperModel();
     } else {
-      returnValue = getProperty(
-        settings.value,
-        eventModel,
-        dataLayerModel,
-        isReturnOnlyEventProps
-      );
+      returnValue = getProperty();
     }
   } else {
-    if (!isInDataLayerPushEvent(dataLayerModel)) {
+    if (!isInDataLayerPushEvent()) {
       turbine.logger.debug('abstract model computed state was returned');
       returnValue =
         window.extensionGoogleDataLayer.dataLayerHelper.getComputedState();
@@ -48,18 +44,13 @@ module.exports = function (settings, event) {
       returnValue = isReturnOnlyEventProps ? eventModel : dataLayerModel;
     }
   }
-
   return returnValue;
 
-  function hasSettings(settings) {
-    return !!settings && settings.value;
-  }
-
-  function isInDataLayerPushEvent(dataLayerModel) {
+  function isInDataLayerPushEvent() {
     return !!dataLayerModel;
   }
 
-  function getPropertyFromHelperModel(property) {
+  function getPropertyFromHelperModel() {
     turbine.logger.debug(
       'a property was read from the computed state at the time of rule execution ' +
         JSON.stringify(property)
@@ -68,14 +59,9 @@ module.exports = function (settings, event) {
   }
 
   /* when fetching a property try the event object first, then the data layer model */
-  function getProperty(
-    property,
-    eventModel,
-    dataLayerModel,
-    isReturnOnlyEventProps
-  ) {
+  function getProperty() {
     if (property) {
-      const valueFromEventModel = extractValueFromObject(property, eventModel);
+      const valueFromEventModel = extractValueFromObject(eventModel);
       let value = '';
       if (valueFromEventModel) {
         value = valueFromEventModel;
@@ -85,7 +71,7 @@ module.exports = function (settings, event) {
         );
       }
       if (!value && !isReturnOnlyEventProps) {
-        value = extractValueFromObject(property, dataLayerModel);
+        value = extractValueFromObject(dataLayerModel);
         turbine.logger.debug(
           'a property was read from the computed state after a push event ' +
             JSON.stringify(property + ' = ' + value)
@@ -95,8 +81,8 @@ module.exports = function (settings, event) {
     }
   }
 
-  function extractValueFromObject(key, target) {
-    const split = key.split('.');
+  function extractValueFromObject(target) {
+    const split = property.split('.');
     for (let i = 0; i < split.length; i++) {
       if (target[split[i]] === undefined) return undefined;
       target = target[split[i]];
