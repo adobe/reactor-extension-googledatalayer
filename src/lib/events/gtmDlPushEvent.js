@@ -71,6 +71,8 @@ module.exports = function (settings, trigger) {
     trigger: trigger
   });
 
-  initializeListener();
-  instantiateHeloer();
+  window.onload = function () {
+    initializeListener();
+    instantiateHeloer();
+  };
 };
