@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 'use strict';
 
 const constants = require('../helpers/constants');
-const instantiateHeloer = require('../helpers/instantiateGtmDlHelper');
+const instantiateHelper = require('../helpers/instantiateGtmDlHelper');
 const triggers = [];
 
 const handler = function (argEvent) {
@@ -73,6 +73,6 @@ module.exports = function (settings, trigger) {
 
   window.onload = function () {
     initializeListener();
-    instantiateHeloer();
+    instantiateHelper();
   };
 };
