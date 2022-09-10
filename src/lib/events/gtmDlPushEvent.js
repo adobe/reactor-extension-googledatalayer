@@ -61,7 +61,7 @@ const handler = function (argEvent) {
 };
 
 let initializeListener = function () {
-  document.body.addEventListener(constants.DATALAYERCHANGE, handler);
+  document.addEventListener(constants.DATALAYERCHANGE, handler);
   initializeListener = function () {};
 };
 
@@ -71,8 +71,6 @@ module.exports = function (settings, trigger) {
     trigger: trigger
   });
 
-  window.onload = function () {
-    initializeListener();
-    instantiateHelper();
-  };
+  initializeListener();
+  instantiateHelper();
 };

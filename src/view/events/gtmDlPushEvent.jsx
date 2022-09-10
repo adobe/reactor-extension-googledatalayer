@@ -99,7 +99,25 @@ export default () => {
                 <RegexToggle name="valueIsRegex" marginTop="size-300" />
               </Flex>
             )}
-            <Heading level={2}>Examples</Heading>
+            <Heading level={2}>Beware infinite loops!</Heading>
+            <p>
+              If you listen to the Data Layer and push to it in an action, you
+              risk introducing infinite loops, particularly with the option to
+              listen for all data pushes.
+            </p>
+            <Heading level={2}>Accessing the Event Object</Heading>
+            <p>
+              The data element included in the Google Data Layer extension gives
+              flexible access to the Data Layer and its elements however, the
+              Tags <em>event</em> object can also be exploited. To see this, add
+              a custom code action to the Tags rule that uses the Google Data
+              Data Layer event listener (this page), containing:
+              <pre>console.log(event);</pre> When viewing the browser console
+              you can see that, in addition to rule information,
+              <em>event.dataLayerModel</em> and <em>event.eventModel</em> are
+              available.
+            </p>
+            <Heading level={2}>Usage Information and Examples</Heading>
             <Heading level={3}>Listen to all pushes</Heading>
             <p>
               Listening to all pushes will trigger the rule when data or events

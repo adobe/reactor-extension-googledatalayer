@@ -11,8 +11,6 @@ governing permissions and limitations under the License.
 
 'use strict';
 
-const getDataLayer = require('../helpers/getDataLayer');
-
 module.exports = function (settings, event) {
   const dataLayerModel = event && event.event && event.event.dataLayerModel;
   const eventModel = event && event.event && event.event.eventModel;
@@ -28,7 +26,7 @@ module.exports = function (settings, event) {
       : 'the rule is being executed outside a data layer push event'
   );
 
-  let returnValue = '';
+  let returnValue;
   if (property) {
     if (!isInDataLayerPushEvent()) {
       returnValue = getPropertyFromHelperModel();
