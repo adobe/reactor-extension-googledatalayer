@@ -41,7 +41,7 @@ export default () => {
             necessityIndicator="label"
           />
           <ToggleSwitch
-            isSelected={Boolean(isReturnOnlyEventProps)}
+            isSelected={isReturnOnlyEventProps}
             label="Only event properties"
             name="isReturnOnlyEventProps"
             marginTop="size-300"

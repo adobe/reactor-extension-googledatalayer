@@ -21,7 +21,7 @@ export default ({ name, label }) => {
       control={control}
       name={name}
       label={label}
-      defaultValue=""
+      defaultValue={Boolean(false)}
       render={({ field: { onChange, value } }) => (
         // eslint-disable-next-line react/jsx-props-no-spreading
         <Switch isSelected={Boolean(value)} onChange={onChange} label={label}>
