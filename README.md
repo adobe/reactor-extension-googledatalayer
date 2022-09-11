@@ -50,7 +50,8 @@ The data extension provides:
 - A Data Element for accessing Data Layer computed state and event values.
 - A listener event to catch data layer events and changes.
 - An action to support dataLayer push
-- An action to reset the datalayer to the computed state if available
+- An action to reset the datalayer to the computed state if available (v1.1.1+)
+- An action to push to the data layer using a key/value multified dialog (v1.2+)
 
 ## More information
 
