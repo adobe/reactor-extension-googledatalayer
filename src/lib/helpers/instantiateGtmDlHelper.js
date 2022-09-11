@@ -21,7 +21,7 @@ module.exports = () => {
     window.extensionGoogleDataLayer.dataLayerHelper ||
     new window.extensionGoogleDataLayer.DataLayerHelper(getDataLayer(), {
       listener: function (argDataLayerModel, argEventModel) {
-        document.body.dispatchEvent(
+        document.dispatchEvent(
           new CustomEvent(constants.DATALAYERCHANGE, {
             bubbles: false,
             detail: {

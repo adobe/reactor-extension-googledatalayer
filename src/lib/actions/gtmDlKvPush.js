@@ -15,7 +15,7 @@
 const getDataLayer = require('../helpers/getDataLayer');
 
 module.exports = function (settings) {
-  var options = (settings.parameters || []).reduce(function (
+  const options = (settings.parameters || []).reduce(function (
     allParameters,
     parameter
   ) {
