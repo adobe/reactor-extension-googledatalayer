@@ -17,6 +17,7 @@ const constants = {
   METHOD_ALLEVENTS: 'allEvents',
   METHOD_ALLDATA: 'allData',
   METHOD_ALLCHANGES: 'allChanges',
-  DEFAULTDATALAYER: 'dataLayer'
+  DEFAULTDATALAYER: 'dataLayer',
+  KEYWORD_EVENT: 'event'
 };
 module.exports = Object.freeze(constants);

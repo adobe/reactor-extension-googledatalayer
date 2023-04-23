@@ -28,7 +28,14 @@ const handler = function (argEvent) {
       event: argEvent.detail
     };
 
-    const eventName = eventModel && eventModel.event;
+    let eventName = eventModel && eventModel.event;
+    /* handle gtag() type event (event keyword and name are pushed as array items) */
+    if (!eventName) {
+      eventName =
+        eventModel[0] === constants.KEYWORD_EVENT && eventModel[1]
+          ? eventModel[1]
+          : undefined;
+    }
 
     if (method === constants.METHOD_ALLCHANGES) {
       trigger(result);
