@@ -105,6 +105,25 @@ export default () => {
               risk introducing infinite loops, particularly with the option to
               listen for all data pushes.
             </p>
+            <Heading level={2}>GTag Type Data Structure</Heading>
+            <p>
+              Use of the gtag() function will result in an entry in the
+              datalayer that differs from the push() examples used in the
+              information in this page. Instead of a key &quot;event&quot; with
+              a value <em>eventName</em>, a gtag event results in a simple array
+              in the datalayer as shown below:
+            </p>
+            <div className="code">
+              0:&quot;event&quot;
+              <br />
+              1:&quot;page_view&quot;
+              <br />
+              2:{}
+            </div>
+            <p>
+              The GTag event format is supported in the extension since version
+              1.2.1.
+            </p>
             <Heading level={2}>Accessing the Event Object</Heading>
             <p>
               The data element included in the Google Data Layer extension gives
