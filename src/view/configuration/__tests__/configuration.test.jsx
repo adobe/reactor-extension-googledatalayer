@@ -11,6 +11,7 @@ governing permissions and limitations under the License.
 
 import { screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event';
 import renderView from '../../__tests_helpers__/renderView';
 import { inputOnChange } from '../../__tests_helpers__/jsDomHelpers';
 
@@ -29,7 +30,8 @@ afterEach(() => {
 });
 
 const getFromFields = () => ({
-  dataLayerTextfield: screen.queryByLabelText(/data layer/i)
+  dataLayerTextfield: screen.queryByLabelText(/data layer/i),
+  doConvertArrayEventsToggle: screen.queryByRole(/switch/i)
 });
 
 describe('configuration view', () => {
@@ -39,13 +41,15 @@ describe('configuration view', () => {
     await act(async () => {
       extensionBridge.init({
         settings: {
-          dataLayer: 'foo'
+          dataLayer: 'foo',
+          doConvertArrayEvents: false
         }
       });
     });
 
-    const { dataLayerTextfield } = getFromFields();
+    const { dataLayerTextfield, doConvertArrayEventsToggle } = getFromFields();
     expect(dataLayerTextfield.value).toBe('foo');
+    expect(doConvertArrayEventsToggle.value).toBeFalsy();
   });
 
   test('sets settings from form values', async () => {
@@ -55,12 +59,12 @@ describe('configuration view', () => {
       extensionBridge.init();
     });
 
-    const { dataLayerTextfield } = getFromFields();
+    const { dataLayerTextfield, doConvertArrayEventsToggle } = getFromFields();
+    await userEvent.click(doConvertArrayEventsToggle);
     inputOnChange(dataLayerTextfield, 'foo');
 
-    expect(extensionBridge.getSettings()).toEqual({
-      dataLayer: 'foo'
-    });
+    expect(extensionBridge.getSettings().dataLayer).toEqual('foo');
+    expect(extensionBridge.getSettings().doConvertArrayEvents).toBeTruthy();
   });
 
   test('sets errors if required values are not provided', async () => {

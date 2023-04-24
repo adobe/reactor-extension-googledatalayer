@@ -14,6 +14,8 @@ governing permissions and limitations under the License.
 const constants = require('../helpers/constants');
 const instantiateHelper = require('../helpers/instantiateGtmDlHelper');
 const triggers = [];
+const doConvertArrayEvents =
+  turbine.getExtensionSettings().doConvertArrayEvents;
 
 const handler = function (argEvent) {
   triggers.forEach(function (triggerData) {
@@ -24,18 +26,22 @@ const handler = function (argEvent) {
     const eventModel =
       argEvent && argEvent.detail && argEvent.detail.eventModel;
 
+    if (doConvertArrayEvents && eventModel) {
+      const isAnArrayEvent =
+        !eventModel.event &&
+        eventModel[0] === constants.KEYWORD_EVENT &&
+        eventModel[1];
+      if (isAnArrayEvent) {
+        eventModel.event = eventModel[1];
+        eventModel.data = eventModel[2] ? eventModel[2] : undefined;
+      }
+    }
+
+    const eventName = eventModel && eventModel.event;
+
     const result = {
       event: argEvent.detail
     };
-
-    let eventName = eventModel && eventModel.event;
-    /* handle gtag() type event (event keyword and name are pushed as array items) */
-    if (!eventName) {
-      eventName =
-        eventModel[0] === constants.KEYWORD_EVENT && eventModel[1]
-          ? eventModel[1]
-          : undefined;
-    }
 
     if (method === constants.METHOD_ALLCHANGES) {
       trigger(result);
