@@ -44,7 +44,3 @@ export const inputOnChange = (input, value) =>
   fireEvent.change(input, {
     target: { value }
   });
-
-export const changeToggleValue = async (toggleInput) => {
-  await userEvent.click(toggleInput);
-};

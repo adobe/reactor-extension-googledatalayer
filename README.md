@@ -1,8 +1,5 @@
 # Google Data Layer extension for Adobe Experience Platform Tags
 
-> **Note**
-> The Google Data Layer extension is a beta.
-
 ## Overview
 
 This extension allows Adobe Experience Platform Tags (fka Launch) to use a Google data layer, either independently or simultaneously with Google solutions, and using the same logic; Google's open source Data Layer _Helper_ library. The _Helper_ library provides similar Event Driven functionality to the Adobe Client Data Dayer (ACDL). The data elements, rules and actions of the extension provide similar functionality to those in the [ACDL extension](https://github.com/pitchmuc/acdl_extension).

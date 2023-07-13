@@ -58,14 +58,20 @@ export default () => {
           <View>
             <ToggleSwitch
               name="doConvertArrayEvents"
-              label="Convert array events"
+              label="support gtag events"
               marginTop="size-300"
             />
-            <Heading level={2}>Conversion of Event Arrays</Heading>
+            <Heading level={2}>Support for gtag Event Arrays</Heading>
+            <p>
+              &quot;Lab&quot; feature, new in version 1.2.1. Please test
+              thoroughly. Feedback is welcome ( google-data-layer@adobe.com )
+            </p>
             <p>
               an event created with the wrapper gtag() function will result in
-              an event array as below. Enabling this toggle will convert this in
-              to an event object suitable for use with the extension.
+              the push of an event array to the data layer, as shown below. By
+              default this would not be caught as an event by the Adobe Google
+              Data Layer extension logic, and it is difficult to access the
+              properties, as there is no key-value structure at the root level.
             </p>
             <p>
               [ <br />
@@ -73,14 +79,24 @@ export default () => {
               1: &quot;<em>event_name</em>&quot; <br />
               2: &#123; &quot;foo&quot;:&quot;bar&quot; &#125; <br />]
             </p>
-            <p>becomes:</p>
+            <p>
+              Enabling the support for this will make this data available in the
+              standard object key-value structure as shown below. <br />
+              Note that this is done on-the-fly in Tags and is&nbsp;
+              <strong>not</strong> pushed to the data layer, nor visible to
+              Google systems.
+            </p>
             <p>
               &#123;
-              <br /> &quot;event&quot;: &quot;<em>event_name</em>&quot;
+              <br /> &quot;event&quot;: &quot;<em>event_name</em>&quot;,
               <br />
               &quot;foo&quot;:&quot;bar&quot;
               <br />
               &#125;
+            </p>
+            <p>
+              If there is no need to support these array-type events in your
+              implementation, it is recommended to leave this feature disabled.
             </p>
           </View>
         </Flex>

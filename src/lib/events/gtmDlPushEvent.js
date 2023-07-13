@@ -33,7 +33,7 @@ const handler = function (argEvent) {
         eventModel[1];
       if (isAnArrayEvent) {
         eventModel.event = eventModel[1];
-        eventModel.data = eventModel[2] ? eventModel[2] : undefined;
+        eventModel.gaArrayEvent = eventModel[2] ? eventModel[2] : undefined;
       }
     }
 

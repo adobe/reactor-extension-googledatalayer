@@ -16,6 +16,8 @@ module.exports = function (settings, event) {
   const eventModel = event && event.event && event.event.eventModel;
   const isReturnOnlyEventProps = settings.isReturnOnlyEventProps;
   const property = settings && settings.value;
+  const doConvertArrayEvents =
+    turbine.getExtensionSettings().doConvertArrayEvents;
 
   turbine.logger.debug(
     'isReturnOnlyEventProps toggle is set to ' + isReturnOnlyEventProps
@@ -59,10 +61,13 @@ module.exports = function (settings, event) {
   /* when fetching a property try the event object first, then the data layer model */
   function getProperty() {
     if (property) {
-      const valueFromEventModel = extractValueFromObject(eventModel);
       let value = '';
-      if (valueFromEventModel) {
-        value = valueFromEventModel;
+      if (doConvertArrayEvents && isGaArrayEvent()) {
+        value = extractValueFromObject(eventModel.gaArrayEvent);
+      } else {
+        value = extractValueFromObject(eventModel);
+      }
+      if (value) {
         turbine.logger.debug(
           'a property was read from the event object after a push event ' +
             JSON.stringify(property + ' = ' + value)
@@ -77,6 +82,10 @@ module.exports = function (settings, event) {
       }
       return value;
     }
+  }
+
+  function isGaArrayEvent() {
+    return eventModel.gaArrayEvent !== undefined;
   }
 
   function extractValueFromObject(target) {

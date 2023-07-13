@@ -107,11 +107,11 @@ export default () => {
             </p>
             <Heading level={2}>GTag Type Data Structure</Heading>
             <p>
-              Use of the gtag() function will result in an entry in the
-              datalayer that differs from the push() examples used in the
-              information in this page. Instead of a key &quot;event&quot; with
-              a value <em>eventName</em>, a gtag event results in a simple array
-              in the datalayer as shown below:
+              Use of the Google Analytics gtag() function will result in a
+              datalayer entry that differs from the Google Tag Manager push()
+              examples used in the information in this page. Instead of a key
+              &quot;event&quot; with a value <em>eventName</em>, gtag pushes an
+              event as an array as shown below:
             </p>
             <div className="code">
               0:&quot;event&quot;
@@ -121,8 +121,9 @@ export default () => {
               2:{}
             </div>
             <p>
-              The GTag event format is supported in the extension since version
-              1.2.1.
+              The support for this format can be enabled in the extension
+              configuration dialog. If not enabled then gtag event pushes will
+              pushes will not be recognized as data layer events.
             </p>
             <Heading level={2}>Accessing the Event Object</Heading>
             <p>
