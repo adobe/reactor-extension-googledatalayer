@@ -17,3 +17,6 @@ node_modules/
 
 .entries
 .eslintcache
+/releaser.sh
+/techaccountuploader.sh
+/temp/

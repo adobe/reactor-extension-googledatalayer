@@ -2,10 +2,10 @@
   "displayName": "Google Data Layer",
   "name": "adobegoogledatalayer",
   "exchangeUrl": "https://exchange.adobe.com/apps/ec/108445/google-data-layer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Supports the use of a Google data layer in Platform Data Collection / Launch. The extension uses Google's Data Layer Helper. A Google Data Layer will be created if not present.",
   "author": {
-    "name": "Adobe Consulting",
+    "name": "Adobe Professional Services",
     "email": "google-data-layer@adobe.com"
   },
   "viewBasePath": "dist/",
@@ -79,6 +79,9 @@
         "dataLayer": {
           "type": "string",
           "minLength": 1
+        },
+        "doConvertArrayEvents": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false,

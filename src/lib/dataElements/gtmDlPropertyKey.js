@@ -12,10 +12,18 @@ governing permissions and limitations under the License.
 'use strict';
 
 module.exports = function (settings, event) {
-  const dataLayerModel = event && event.event && event.event.dataLayerModel;
-  const eventModel = event && event.event && event.event.eventModel;
+  const dataLayerModel =
+    event && event.event && event.event.dataLayerModel
+      ? event.event.dataLayerModel
+      : undefined;
+  const eventModel =
+    event && event.event && event.event.eventModel
+      ? event.event.eventModel
+      : undefined;
   const isReturnOnlyEventProps = settings.isReturnOnlyEventProps;
-  const property = settings && settings.value;
+  const property = settings && settings.value ? settings.value : undefined;
+  const doConvertArrayEvents =
+    turbine.getExtensionSettings().doConvertArrayEvents;
 
   turbine.logger.debug(
     'isReturnOnlyEventProps toggle is set to ' + isReturnOnlyEventProps
@@ -59,10 +67,13 @@ module.exports = function (settings, event) {
   /* when fetching a property try the event object first, then the data layer model */
   function getProperty() {
     if (property) {
-      const valueFromEventModel = extractValueFromObject(eventModel);
       let value = '';
-      if (valueFromEventModel) {
-        value = valueFromEventModel;
+      if (doConvertArrayEvents && isGaArrayEvent()) {
+        value = extractValueFromObject(eventModel.gaArrayEvent);
+      } else {
+        value = extractValueFromObject(eventModel);
+      }
+      if (value) {
         turbine.logger.debug(
           'a property was read from the event object after a push event ' +
             JSON.stringify(property + ' = ' + value)
@@ -77,6 +88,10 @@ module.exports = function (settings, event) {
       }
       return value;
     }
+  }
+
+  function isGaArrayEvent() {
+    return eventModel.gaArrayEvent !== undefined;
   }
 
   function extractValueFromObject(target) {

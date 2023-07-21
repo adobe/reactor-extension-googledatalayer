@@ -1,6 +1,6 @@
 {
-  "name": "reactor-extension-googledatalayer",
-  "version": "1.2.0",
+  "name": "reactor-extension-googledatalayer-dev",
+  "version": "1.2.1",
   "description": "The Google Data Layer extension adds support for a GTM/GTag Data Layer",
   "scripts": {
     "build": "rm -rf dist && webpack --mode production",
@@ -49,7 +49,7 @@
     "react-hook-form": "^7.30.0"
   },
   "devDependencies": {
-    "@adobe/reactor-sandbox": "^12.4.0",
+    "@adobe/reactor-sandbox": "^12.5.0",
     "@babel/core": "^7.17.9",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/eslint-plugin": "^7.17.7",
