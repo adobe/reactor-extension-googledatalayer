@@ -24,7 +24,9 @@ const handler = function (argEvent) {
 
     const { method, valueIsRegex, eventKey } = settings;
     const eventModel =
-      argEvent && argEvent.detail && argEvent.detail.eventModel;
+      argEvent && argEvent.detail && argEvent.detail.eventModel
+        ? argEvent.detail.eventModel
+        : undefined;
 
     if (doConvertArrayEvents && eventModel) {
       const isAnArrayEvent =

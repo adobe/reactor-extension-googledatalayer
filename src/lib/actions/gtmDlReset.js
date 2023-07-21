@@ -13,7 +13,10 @@ governing permissions and limitations under the License.
 
 module.exports = function (settings, event) {
   const dlName = turbine.getExtensionSettings().dataLayer;
-  const datalayerModel = event && event.event && event.event.dataLayerModel;
+  const datalayerModel =
+    event && event.event && event.event.dataLayerModel
+      ? event.event.dataLayerModel
+      : undefined;
 
   Object.keys(window[dlName]).forEach((key) => {
     if (typeof window[dlName][key] !== 'function') {

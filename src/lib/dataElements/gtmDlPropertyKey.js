@@ -12,10 +12,16 @@ governing permissions and limitations under the License.
 'use strict';
 
 module.exports = function (settings, event) {
-  const dataLayerModel = event && event.event && event.event.dataLayerModel;
-  const eventModel = event && event.event && event.event.eventModel;
+  const dataLayerModel =
+    event && event.event && event.event.dataLayerModel
+      ? event.event.dataLayerModel
+      : undefined;
+  const eventModel =
+    event && event.event && event.event.eventModel
+      ? event.event.eventModel
+      : undefined;
   const isReturnOnlyEventProps = settings.isReturnOnlyEventProps;
-  const property = settings && settings.value;
+  const property = settings && settings.value ? settings.value : undefined;
   const doConvertArrayEvents =
     turbine.getExtensionSettings().doConvertArrayEvents;
 
