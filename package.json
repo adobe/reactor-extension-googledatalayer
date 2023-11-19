@@ -1,6 +1,6 @@
 {
-  "name": "reactor-extension-googledatalayer-dev",
-  "version": "1.2.1",
+  "name": "reactor-extension-googledatalayer",
+  "version": "1.2.2",
   "description": "The Google Data Layer extension adds support for a GTM/GTag Data Layer",
   "scripts": {
     "build": "rm -rf dist && webpack --mode production",

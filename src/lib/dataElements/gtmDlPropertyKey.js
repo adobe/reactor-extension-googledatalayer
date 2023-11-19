@@ -91,10 +91,13 @@ module.exports = function (settings, event) {
   }
 
   function isGaArrayEvent() {
-    return eventModel.gaArrayEvent !== undefined;
+    return eventModel && eventModel.gaArrayEvent !== undefined;
   }
 
   function extractValueFromObject(target) {
+    if (target === undefined) {
+      return undefined;
+    }
     const split = property.split('.');
     for (let i = 0; i < split.length; i++) {
       if (target[split[i]] === undefined) return undefined;
