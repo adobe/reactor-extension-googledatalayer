@@ -20,9 +20,6 @@ The extension is fully compatible with a Platform Web SDK / XDM implementation, 
 
 The extension does not change the data layer unless a push is made, nor interact with other Helper objects (such as the internal GTM Helper). The Helper object used by launch to monitor the data layer for changes is separate from other Helpers accessing the data layer, and maintains and operates on an internal model of the data layer; so an event on the data layer is caught and processed independently in each Helper object. An example of this is seen when the history of past data layer events is processed - each Helper maintains its own history.
 
-> **Warning**
-> The extension is however still in beta, and despite extensive testing, unwanted interference between multiple data layer consumers cannot be fully ruled out.
-
 ## Event Integrity
 
 A key function of an Event Driven Data Layer (EDDL) is to allow stable-state 'snapshots' of the data layer to be processed independently of ongoing data layer activity. To achieve this the GDL _Helper_ object maintains the data layer computed state (an internal model of the data layer) and passes a copy of this state to a Tags rule whenever the data layer state changes (a _push_ event); so allowing Tags to process the event-specific 'snapshot' in a Rule.
@@ -63,8 +60,6 @@ This project uses code from the following projects:
 [Google Helper project](https://github.com/google/data-layer-helper)
 
 [ACDL Extension](https://github.com/pitchmuc/acdl_extension)
-
-[Valtech Tags Google Data Layer Extension](https://github.com/valtech-ch/aeptags-google-datalayer-extension)
 
 ## Development
 
